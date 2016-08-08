@@ -1,11 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
 )
 
 func fib(n int) int {
@@ -33,11 +31,12 @@ func fib(n int) int {
 }
 
 func main() {
-	fmt.Println("Fibonacci Number calculator")
-	fmt.Print("input number:")
-	reader := bufio.NewReader(os.Stdin)
-	input, _ := reader.ReadString('\n')
-	input = strings.Trim(input, "\n")
+	if len(os.Args) < 2 {
+		fmt.Fprint(os.Stderr, "do nothing\n")
+		os.Exit(1)
+	}
+
+	input := os.Args[1]
 
 	number, err := strconv.Atoi(input)
 	if err != nil {
