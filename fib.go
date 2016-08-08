@@ -1,12 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
 
 func fib(n int) int {
-	var f0 int = 0
-	var f1 int = 1
-
 	if n >= 0 {
+		var f0 int = 0
+		var f1 int = 1
 		switch n {
 		case 0:
 			return f0
@@ -22,20 +27,25 @@ func fib(n int) int {
 			return fib
 		}
 	} else {
-		fmt.Printf("You have to input natural number.")
+		fmt.Println("You have to input positive natural number.")
 		return -1
 	}
-	// switch inputType := n.(type) {
-	// case int:
-	//
-	// default:
-	// 	fmt.Printf("Your input data is %d.", inputType)
-	// 	fmt.Printf("You can use natural number only.")
-	// }
 }
 
 func main() {
-	for i := 0; i < 15; i++ {
-		fmt.Println("Fibonacci F(", i, "):", fib(i))
+	fmt.Println("Fibonacci Number calculator")
+	fmt.Print("input number:")
+	reader := bufio.NewReader(os.Stdin)
+	input, _ := reader.ReadString('\n')
+	input = strings.Trim(input, "\n")
+
+	number, err := strconv.Atoi(input)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fib := fib(number)
+		if fib != -1 {
+			fmt.Println("Fibonacci F(", number, "):", fib)
+		}
 	}
 }
