@@ -10,19 +10,20 @@ type testValue struct {
 }
 
 func TestFib(t *testing.T) {
-	var testValues []testValue = []testValue{
-		{value: 0, actual: 0},
-		{value: 1, actual: 1},
-		{value: 2, actual: 1},
-		{value: 3, actual: 2},
-		{value: 5, actual: 5},
-		{value: 10, actual: 55},
-		{value: 20, actual: 6765},
+	testValues := []testValue{
+		{0, 0},
+		{1, 1},
+		{2, 1},
+		{3, 2},
+		{5, 5},
+		{10, 55},
+		{20, 6765},
 	}
 
 	for _, data := range testValues {
-		if fib(data.value) != data.actual {
-			t.Errorf("got %v\n want %v", fib(data.value), data.actual)
+		fib, _ := fib(data.value)
+		if fib != data.actual {
+			t.Errorf("got %v\n want %v", fib, data.actual)
 		}
 	}
 }
